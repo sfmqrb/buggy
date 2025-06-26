@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <cstdint>   // for uint16_t
 
 class KVStore {
 public:
@@ -10,11 +11,14 @@ public:
     std::string get(const std::string& key);
     bool remove(const std::string& key);
 
+    bool exists(const std::string& key);
+    void clear();
+
 private:
     char** keys;
     char** values;
-    int capacity;
-    int count;
+    uint16_t  capacity;
+    uint16_t  count;     
 };
 
 // BUG 19: using unseeded rand()
