@@ -6,4 +6,4 @@ To get started, clone this repo and run `docker build -t kvbuggy .` followed by 
 
 Your task is to point a fuzzer (AFL, libFuzzer, honggfuzz or your own harness) at the test binary or write a custom driver that sends random keys, values and command sequences. When the program crashes or misbehaves, note the crash location and trace it back. Once you understand the root cause, correct the code, rebuild and rerun the fuzzer until that issue no longer appears.
 
-When you’ve triaged and fixed each defect, prepare a branch or patch series where every commit clearly names the bug it addresses (for example, “fix: initialize capacity before allocation”). Push your changes and make sure to add logs from your fuzzer. This narrative approach will guide you through fuzzing, diagnosing, and repairing the buggy KVStore. Happy fuzzing!  
+When you’ve triaged and fixed each defect, prepare a commit that clearly names the bug it addresses (for example, “fix: initialize capacity before allocation”). Push your changes and make sure to add logs from your fuzzer for each bug fix. Happy fuzzing!  
