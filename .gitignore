@@ -34,3 +34,4 @@ docker-compose.override.yml
 
 venv/
 __pycache__/
+test.py
