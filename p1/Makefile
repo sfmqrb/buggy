@@ -8,8 +8,8 @@ ifeq ($(SAN),1)
  LDFLAGS+= -fsanitize=address,undefined
 endif
 
-SRC = mini_proto.c vuln_demo.c
-BIN = vuln_demo.bin
+SRC = mini_proto.c demo.c
+BIN = demo.bin
 
 all: $(BIN)
 
