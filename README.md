@@ -51,10 +51,7 @@ example2: {'Hello': 'world',
    * Any **fuzzing harness or test scripts** you wrote to uncover and demonstrate each bug.
    * (Optional) A brief write-up listing the bugs you discovered and how you fixed them.
 
----
-
-**Link to the official MessagePack library (for reference and testing):**
-
+Link to the official MessagePack library (for reference and testing):
 ```bash
 pip install msgpack
 ```
