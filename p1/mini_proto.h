@@ -4,17 +4,19 @@
 #include <stddef.h>
 #include <stdint.h>
 
-#define MAX_NAME 32              /* includes space for the '\0' */
+#define MAX_NAME 32         
 
-/* Simple record type */
 typedef struct {
-    char     name[MAX_NAME];     /* null-terminated */
+    char     name[MAX_NAME];
     uint8_t  age;
     uint32_t score_count;
-    uint16_t *scores;            /* heap-allocated array, score_count entries */
+    uint16_t *scores;
 } record_t;
 
-/* Returns number of bytes written, or 0 on error.
+/* Layout:
+   [name_len:1][name_bytes][age:1][score_count:4][scores:2*score_count]
+
+   Returns number of bytes written, or 0 on error.
    If out_buf == NULL, returns the size that would be needed (non-zero). */
 size_t encode_record(const record_t *rec, uint8_t *out_buf, size_t out_cap);
 
