@@ -9,7 +9,7 @@ ifeq ($(SAN),1)
 endif
 
 SRC = mini_proto.c vuln_demo.c
-BIN = vuln_demo
+BIN = vuln_demo.bin
 
 all: $(BIN)
 

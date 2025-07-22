@@ -23,6 +23,8 @@
 # Logs and databases
 *.log
 *.sqlite
+*.bin
+
 
 # Docker
 docker-compose.override.yml
