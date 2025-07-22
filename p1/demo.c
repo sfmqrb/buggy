@@ -17,6 +17,10 @@ int main(void) {
     in.score_count = 3;
     uint16_t tmp_scores[] = {100, 250, 999};
     in.scores = tmp_scores;  // stack array OK for encode
+    
+    printf("Input Record:\nName: %s\nAge: %u\nScores:", in.name, in.age);
+    for (uint32_t i = 0; i < in.score_count; i++) printf(" %u", in.scores[i]);
+    printf("\n");
 
     size_t need = encode_record(&in, NULL, 0);    // query size
     uint8_t *buf = malloc(need);
@@ -35,8 +39,7 @@ int main(void) {
         return 1;
     }
 
-
-    printf("Name: %s\nAge: %u\nScores:", out->name, out->age);
+    printf("Decoded Record:\nName: %s\nAge: %u\nScores:", out->name, out->age);
     for (uint32_t i = 0; i < out->score_count; i++) printf(" %u", out->scores[i]);
     printf("\n");
 
