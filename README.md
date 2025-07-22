@@ -26,7 +26,6 @@ make            # normal build
 * **Fuzzing harness/tests** if you used fuzzing.
 * A **write-up** listing each bug, trigger, root cause, and fix.
 
-That’s it—keep it tight. Let me know if you want Problem 2.
 
 **Problem 2: Auditing and Exploiting a Vulnerable Web Application**
 
