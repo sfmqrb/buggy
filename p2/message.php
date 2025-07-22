@@ -6,9 +6,8 @@ require 'db.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $db = get_db();
     $uid = current_user()['id'];
-    // Stored XSS: content inserted raw
-    $sql = "INSERT INTO messages(user_id, content) VALUES ($uid, '{$_POST['content']}')";
-    $db->exec($sql);
+    $stmt = $db->prepare("INSERT INTO messages(user_id, content) VALUES (?, ?)");
+    $stmt->execute([$uid, $_POST['content']]);
     header("Location: index.php");
     exit;
 }

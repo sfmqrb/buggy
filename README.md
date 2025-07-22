@@ -66,3 +66,66 @@ import msgpack
 ```
 
 > **Note:** the bugs are in *our* implementation (`msgpacker.py`), not in the official library. Use the official `msgpack` purely as a correctness oracle.
+
+
+**Problem 2: Auditing and Exploiting a Vulnerable Web Application**
+
+You are given a deliberately insecure PHP/SQLite web application packaged as a Docker image. Your task is to investigate the code and runtime behavior, discover **at least six distinct vulnerabilities**, exploit them, and document each with a proposed fix.
+
+Our starter materials provide:
+
+* **Application source** (`.php` files) and an auto-initialized **SQLite database** (`data.db`).
+* A **Dockerfile** you can build locally to run the app.
+
+---
+
+1. **What’s happening here?**
+   The container launches an Apache/PHP server that exposes multiple dynamic endpoints (login, registration, message posting, search, user profiles, a ping tool, etc.). The code intentionally omits common safeguards (input validation, output encoding, access control), creating an environment suitable for security analysis.
+
+2. **Your goals**
+
+   * Find **six different vulnerabilities** in the codebase (e.g., injection, XSS, insecure direct object reference, command execution, weak authentication logic, etc.). Do **not** reuse the same root cause twice.
+   * For each vulnerability, produce an exploit demonstrating impact.
+   * For each, propose a concrete fix (code change or mitigation strategy).
+
+3. **Setup and running the application**
+
+   Build and run the Docker image:
+
+   ```bash
+   docker build -t vuln-app .
+   docker run -d -p 9090:80 vuln-app
+   ```
+
+   Visit the application in your browser at:
+
+   ```
+   http://localhost:9090/
+   ```
+
+   To inspect code and database from inside the container:
+
+   ```bash
+   docker ps                     # find container ID
+   docker exec -it <id> bash
+   cd /var/www/html
+   sqlite3 data.db
+   ```
+
+4. **Deliverables**
+   Submit a report (Markdown or PDF) containing **six vulnerability entries**. For each entry include:
+
+   * **Title:** short name of the issue.
+   * **Location:** filename and function/line reference.
+   * **Description:** what is wrong and why it is a vulnerability.
+   * **Reproduction / Exploit:** exact steps or payload used.
+   * **Impact:** what an attacker gains (e.g., data disclosure, code execution).
+   * **Fix:** precise remediation (e.g., parameterized queries, escaping, access control, input validation, least privilege).
+
+   Do not modify the application while discovering issues; fixes should be described, not applied (unless you create a patched version separately).
+
+---
+
+> **Reminder:** Your objective is to *analyze*, *exploit*, and *document*. Focus on clarity and technical accuracy in your reports.
+
+
