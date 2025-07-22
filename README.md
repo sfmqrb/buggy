@@ -49,7 +49,7 @@ example2: {'Hello': 'world',
 
    * A **corrected `msgpacker.py`** that fully conforms to MessagePack (except for floats).
    * Any **fuzzing harness or test scripts** you wrote to uncover and demonstrate each bug.
-   * (Optional) A brief write-up listing the bugs you discovered and how you fixed them.
+   * A write-up listing the bugs you discovered and how you fixed them.
 
 Link to the official MessagePack library (for reference and testing):
 ```bash
