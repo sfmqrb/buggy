@@ -1,33 +1,34 @@
-**Problem 1: Finding bugs in our memory-unsafe C/C++ binary**
+_The AstraNav probe is set to launch to chart methane plumes on Titan, but its core software stack is a relic: a 25‑year‑old C/C++ navigation binary bolted to a PHP/SQLite “mission console” hastily built during a funding sprint. A single crash or forged packet mid‑flight could waste fuel or disable critical systems, so Command assigns you to harden both layers in the narrow window before rollout._
 
-We wrote a deliberately vulnerable program that parses user commands into fixed-size buffers and performs unchecked string operations. Your job is to **find, trigger, and patch every memory-safety bug** (stack/heap overflows, UAFs, etc.) without changing the program’s intended behavior. At the end report all of these changes.
+_First, you tackle the flight binary. Using coverage‑guided fuzzing, you provoke crashes, capture minimal reproducible inputs, and patch at least six memory issues—while keeping the command interface unchanged so existing scripts still function during Titan orbit insertion._
 
+_Next, you audit the PHP console used by ground crew to upload maneuvers and read telemetry. It freely concatenates user input into SQL, reflects it in HTML, and even shells out to ping subsystems. You document six distinct exploits showing how each could misalign antennas or leak scientific data, then propose precise fixes to ensure the console communicates only with trusted operators once AstraNav is coasting beyond Saturn._
+
+
+## Problem 1: Finding bugs in our memory-unsafe C/C++ binary
+
+The program parses user commands into fixed-size buffers and uses unchecked string operations. Your task is to **find, trigger, and patch every memory-safety bug** (e.g., stack/heap overflows, UAFs, double frees, format strings) without altering observable behavior. Document all changes.
 
 ### Goals
 
-* Locate each divergence from safe behavior (buffer overflow, format string, UAF, double free, etc.).
-* Produce a minimal crashing input (or script) for each.
-* **Patch at least 6 of them** and keep functionality the same.
+* Identify each unsafe behavior.
+* Produce a minimal crashing input (or script) for each issue.
+* **Patch at least six bugs** while preserving functionality.
 
-### Why fuzzing?
-
-Handwritten tests miss boundary cases. Coverage-guided fuzzers generate inputs that quickly expose overflows, empty/huge payloads, and nested cases.
-
-### Setup & run
+### Setup & Run
 
 ```bash
-make            # normal build
+make
 ```
 
 ### Deliverables
 
-* A **patched source** that passes under sanitizers.
-* **Crashing inputs** (before patch) demonstrating each bug.
-* **Fuzzing harness/tests** if you used fuzzing.
-* A **write-up** listing each bug, trigger, root cause, and fix.
+* Patched source.
+* Crashing inputs (pre-patch) for each bug.
+* Fuzzing harness/tests, if used.
+* A write-up: bug, trigger, root cause, and fix.
 
-
-**Problem 2: Auditing and Exploiting a Vulnerable Web Application**
+## Problem 2: Auditing and Exploiting a Vulnerable Web Application
 
 You are given a deliberately insecure PHP/SQLite web application packaged as a Docker image. Your task is to investigate the code and runtime behavior, discover **at least six distinct vulnerabilities**, exploit them, and document each with a proposed fix.
 
