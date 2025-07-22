@@ -68,22 +68,14 @@ Our starter materials provide:
    ```bash
    docker ps                     # find container ID
    docker exec -it <id> bash
-   cd /var/www/html
-   sqlite3 data.db
    ```
 
 4. **Deliverables**
-   Submit a report (Markdown or PDF) containing **six vulnerability entries**. For each entry include:
 
-   * **Title:** short name of the issue.
-   * **Location:** filename and function/line reference.
-   * **Description:** what is wrong and why it is a vulnerability.
-   * **Reproduction / Exploit:** exact steps or payload used.
-   * **Impact:** what an attacker gains (e.g., data disclosure, code execution).
-   * **Fix:** precise remediation (e.g., parameterized queries, escaping, access control, input validation, least privilege).
-
-   Do not modify the application while discovering issues; fixes should be described, not applied (unless you create a patched version separately).
-
+* Patched source.
+* Crashing inputs (pre-patch) for each bug.
+* A write-up: bug, trigger, root cause, and fix.
+   
 ---
 
 > **Reminder:** Your objective is to *analyze*, *exploit*, and *document*. Focus on clarity and technical accuracy in your reports.
