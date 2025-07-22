@@ -1,27 +1,11 @@
-<?php require 'utils.php'; require 'db.php'; ?>
-<!DOCTYPE html>
-<html>
-<head><title>VulnApp</title></head>
-<body>
-<h1>VulnApp</h1>
-<?php if (current_user()): ?>
-<p>Hello, <?= current_user()['username'] ?> |
-   <a href="logout.php">Logout</a></p>
-<p><a href="message.php">Post Message</a> |
-   <a href="search.php">Search</a> |
-   <a href="ping.php">Ping Tool</a></p>
-<?php else: ?>
-<p><a href="login.php">Login</a> or <a href="register.php">Register</a></p>
-<?php endif; ?>
-
-<h2>Recent Messages (Stored XSS)</h2>
+<?php require 'utils.php'; require 'db.php'; site_header(); ?>
+<h2>Recent Messages <small style="font-size:.6em; color:#999;">(Stored XSS)</small></h2>
+<p>Welcome to the deliberately vulnerable app. Try all the classic attacks.</p>
 <?php
 $db = get_db();
 $res = $db->query("SELECT messages.id, content, username FROM messages JOIN users ON users.id = messages.user_id ORDER BY messages.id DESC LIMIT 10;");
 foreach ($res as $row) {
-    // No escaping: Stored XSS
-    echo "<div><strong>{$row['username']}:</strong> {$row['content']}</div>";
+    echo "<div class='message'><span class='user-tag'>".$row['username']."</span> ".$row['content']."</div>"; // no escaping
 }
 ?>
-</body>
-</html>
+<?php site_footer(); ?>
